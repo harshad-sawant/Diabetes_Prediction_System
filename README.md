@@ -17,7 +17,7 @@ A login-free web application that predicts whether a patient is diabetic using *
 
 | Category | Tools |
 |----------|-------|
-| Backend | Python, Flask, SQLite |
+| Backend | Python, Flask, SQL |
 | Frontend | HTML5, Bootstrap 5, Bootstrap Icons, Chart.js |
 | ML / Data | Pandas, NumPy, Scikit-learn, Pickle |
 | Reports | FPDF2 (PDF generation) |
