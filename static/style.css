@@ -1,0 +1,69 @@
+/* Custom styles on top of Bootstrap */
+
+body {
+    background-color: #f4f7fb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.nav-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.navbar-brand span {
+    font-size: 1.05rem;
+}
+
+.nav-link.active {
+    color: #0d6efd !important;
+    font-weight: 600;
+}
+
+.stat-card {
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.detail-box {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.result-banner.result-positive {
+    background: linear-gradient(180deg, #fff5f5 0%, #ffffff 100%);
+    border-left: 4px solid #dc3545;
+}
+
+.result-banner.result-negative {
+    background: linear-gradient(180deg, #f0fff4 0%, #ffffff 100%);
+    border-left: 4px solid #198754;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.table th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+@media (max-width: 576px) {
+    .display-6 {
+        font-size: 1.5rem;
+    }
+}

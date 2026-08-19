@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}About Diabetes | Diabetes Prediction System{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-6 fw-bold"><i class="bi bi-heart-pulse text-danger"></i> About Diabetes</h1>
+    <p class="text-muted">Understanding symptoms, causes, prevention, and precautions.</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 text-danger"><i class="bi bi-thermometer-half"></i> Symptoms</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-dot text-danger"></i> Frequent urination (especially at night)</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-danger"></i> Increased thirst and hunger</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-danger"></i> Unexplained weight loss</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-danger"></i> Fatigue and weakness</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-danger"></i> Blurred vision</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-danger"></i> Slow-healing sores or frequent infections</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-danger"></i> Tingling or numbness in hands/feet</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 text-warning"><i class="bi bi-search"></i> Causes & Risk Factors</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-dot text-warning"></i> Family history of diabetes</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-warning"></i> Overweight or obesity (high BMI)</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-warning"></i> Physical inactivity</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-warning"></i> Unhealthy diet (high sugar/fat intake)</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-warning"></i> Age above 45 years</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-warning"></i> High blood pressure</li>
+                    <li class="list-group-item"><i class="bi bi-dot text-warning"></i> Gestational diabetes during pregnancy</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 text-success"><i class="bi bi-shield-check"></i> Prevention</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success"></i> Maintain a healthy body weight</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success"></i> Exercise regularly (at least 30 min/day)</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success"></i> Eat a balanced diet rich in fiber</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success"></i> Limit sugary and processed foods</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success"></i> Avoid smoking and excessive alcohol</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success"></i> Get regular health checkups</li>
+                    <li class="list-group-item"><i class="bi bi-check2-circle text-success"></i> Monitor blood glucose levels periodically</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3">
+                <h5 class="mb-0 text-primary"><i class="bi bi-exclamation-diamond"></i> Precautions</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-arrow-right-circle text-primary"></i> Take prescribed medications on time</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right-circle text-primary"></i> Monitor blood sugar daily if diabetic</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right-circle text-primary"></i> Follow a diabetic-friendly meal plan</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right-circle text-primary"></i> Keep feet clean and inspect for injuries</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right-circle text-primary"></i> Stay hydrated and manage stress</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right-circle text-primary"></i> Carry emergency glucose if on insulin</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right-circle text-primary"></i> Consult a doctor before any major lifestyle change</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-warning mt-4">
+    <i class="bi bi-info-circle-fill"></i>
+    <strong>Important:</strong> This information is for educational purposes only.
+    Always seek advice from a qualified healthcare professional for diagnosis and treatment.
+</div>
+{% endblock %}

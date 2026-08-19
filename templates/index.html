@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Diabetes Prediction System{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-6 fw-bold"><i class="bi bi-clipboard2-pulse text-primary"></i> Patient Diabetes Risk Assessment</h1>
+    <p class="text-muted">Enter patient health details below to predict diabetes risk using machine learning.</p>
+    <span class="badge rounded-pill bg-primary-subtle text-primary px-3 py-2" id="accuracyBadge">
+        <i class="bi bi-graph-up-arrow"></i> Selected Model Accuracy: <strong>{{ accuracy }}%</strong>
+    </span>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white py-3">
+        <h5 class="mb-0"><i class="bi bi-person-lines-fill text-primary"></i> Patient Details</h5>
+    </div>
+    <div class="card-body p-4">
+        <form action="{{ url_for('predict') }}" method="POST">
+            <div class="row g-3">
+                <div class="col-12">
+                    <label for="model_name" class="form-label fw-semibold">
+                        <i class="bi bi-cpu"></i> Choose Prediction Model
+                    </label>
+                    <select class="form-select" id="model_name" name="model_name">
+                        {% for model_name in model_options %}
+                        <option value="{{ model_name }}" {% if model_name == selected_model %}selected{% endif %}>
+                            {{ model_name }} (Accuracy: {{ model_accuracies[model_name] }}%)
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <div class="form-text">You can choose any available model before making a prediction.</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="patient_name" class="form-label fw-semibold">
+                        <i class="bi bi-person"></i> Patient Name
+                    </label>
+                    <input type="text" class="form-control" id="patient_name" name="patient_name"
+                           placeholder="Enter patient full name" maxlength="100" required>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="sex" class="form-label fw-semibold">
+                        <i class="bi bi-gender-ambiguous"></i> Sex
+                    </label>
+                    <select class="form-select" id="sex" name="sex" required>
+                        <option value="">Select sex</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="pregnancies" class="form-label fw-semibold">Pregnancies</label>
+                    <input type="number" class="form-control" id="pregnancies" name="pregnancies"
+                           min="0" max="20" placeholder="e.g. 2" required>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="age" class="form-label fw-semibold">Age (years)</label>
+                    <input type="number" class="form-control" id="age" name="age"
+                           min="1" max="120" placeholder="e.g. 30" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="glucose" class="form-label fw-semibold">Glucose (mg/dL)</label>
+                    <input type="number" class="form-control" id="glucose" name="glucose"
+                           min="1" max="300" placeholder="e.g. 120" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="blood_pressure" class="form-label fw-semibold">Blood Pressure (mm Hg)</label>
+                    <input type="number" class="form-control" id="blood_pressure" name="blood_pressure"
+                           min="1" max="180" placeholder="e.g. 70" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="skin_thickness" class="form-label fw-semibold">Skin Thickness (mm)</label>
+                    <input type="number" class="form-control" id="skin_thickness" name="skin_thickness"
+                           min="1" max="100" placeholder="e.g. 20" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="insulin" class="form-label fw-semibold">Insulin (mu U/ml)</label>
+                    <input type="number" class="form-control" id="insulin" name="insulin"
+                           min="1" max="900" placeholder="e.g. 80" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="bmi" class="form-label fw-semibold">BMI</label>
+                    <input type="number" class="form-control" id="bmi" name="bmi"
+                           min="1" max="70" step="0.1" placeholder="e.g. 25.4" required>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="diabetes_pedigree" class="form-label fw-semibold">Diabetes Pedigree Function</label>
+                    <input type="number" class="form-control" id="diabetes_pedigree" name="diabetes_pedigree"
+                           min="0" max="3" step="0.001" placeholder="e.g. 0.5" required>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <button type="submit" class="btn btn-primary btn-lg px-5">
+                    <i class="bi bi-cpu"></i> Predict
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    const accuracyMap = {
+        {% for model_name in model_options %}
+        "{{ model_name }}": {{ model_accuracies[model_name] }},
+        {% endfor %}
+    };
+
+    const modelSelect = document.getElementById('model_name');
+    const accuracyBadge = document.getElementById('accuracyBadge');
+
+    if (modelSelect && accuracyBadge) {
+        const updateAccuracy = () => {
+            const selected = modelSelect.value;
+            const value = accuracyMap[selected] ?? 0;
+            accuracyBadge.innerHTML = `<i class="bi bi-graph-up-arrow"></i> Selected Model Accuracy: <strong>${value}%</strong>`;
+        };
+
+        modelSelect.addEventListener('change', updateAccuracy);
+        updateAccuracy();
+    }
+</script>
+{% endblock %}

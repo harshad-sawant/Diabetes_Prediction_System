@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Diabetes Prediction System{% endblock %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h1 class="display-6 fw-bold"><i class="bi bi-speedometer2 text-primary"></i> Analytics Dashboard</h1>
+    <p class="text-muted">Overview of all stored predictions and health metric distributions.</p>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card stat-card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-4">
+                <i class="bi bi-people-fill text-primary display-6"></i>
+                <h3 class="fw-bold mt-2">{{ stats.total }}</h3>
+                <p class="text-muted mb-0">Total Predictions</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card stat-card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-4">
+                <i class="bi bi-exclamation-triangle-fill text-danger display-6"></i>
+                <h3 class="fw-bold mt-2 text-danger">{{ stats.positive }}</h3>
+                <p class="text-muted mb-0">Positive Cases (Diabetic)</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card stat-card border-0 shadow-sm h-100">
+            <div class="card-body text-center py-4">
+                <i class="bi bi-check-circle-fill text-success display-6"></i>
+                <h3 class="fw-bold mt-2 text-success">{{ stats.negative }}</h3>
+                <p class="text-muted mb-0">Negative Cases (Non-Diabetic)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if stats.total == 0 %}
+<div class="alert alert-info text-center">
+    <i class="bi bi-info-circle"></i> No predictions yet. Make a prediction from the
+    <a href="{{ url_for('index') }}">Home page</a> to see dashboard analytics.
+</div>
+{% else %}
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3">
+                <h6 class="mb-0"><i class="bi bi-bar-chart text-primary"></i> BMI Distribution</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="bmiChart" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3">
+                <h6 class="mb-0"><i class="bi bi-bar-chart text-primary"></i> Glucose Distribution</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="glucoseChart" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mx-auto">
+        <div class="card shadow-sm border-0 h-100">
+            <div class="card-header bg-white py-3">
+                <h6 class="mb-0"><i class="bi bi-pie-chart text-primary"></i> Diabetes vs Non-Diabetes</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="resultChart" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+{% if stats.total > 0 %}
+<script>
+    const chartData = {{ chart_data | tojson }};
+
+    const barOptions = {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+    };
+
+    new Chart(document.getElementById('bmiChart'), {
+        type: 'bar',
+        data: {
+            labels: chartData.bmi_labels,
+            datasets: [{
+                label: 'Patients',
+                data: chartData.bmi_counts,
+                backgroundColor: ['#6ea8fe', '#0d6efd', '#ffc107', '#dc3545']
+            }]
+        },
+        options: barOptions
+    });
+
+    new Chart(document.getElementById('glucoseChart'), {
+        type: 'bar',
+        data: {
+            labels: chartData.glucose_labels,
+            datasets: [{
+                label: 'Patients',
+                data: chartData.glucose_counts,
+                backgroundColor: ['#198754', '#ffc107', '#fd7e14', '#dc3545']
+            }]
+        },
+        options: barOptions
+    });
+
+    new Chart(document.getElementById('resultChart'), {
+        type: 'doughnut',
+        data: {
+            labels: chartData.result_labels,
+            datasets: [{
+                data: chartData.result_counts,
+                backgroundColor: ['#dc3545', '#198754']
+            }]
+        },
+        options: { responsive: true }
+    });
+</script>
+{% endif %}
+{% endblock %}
