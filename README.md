@@ -6,7 +6,7 @@ A login-free web application that predicts whether a patient is diabetic using *
 
 - Login-free web application with Bootstrap UI and icons
 - Patient name on every prediction and report
-- SQLite database stores prediction history (name, date/time, positive/negative)
+- SQL database stores prediction history (name, date/time, positive/negative)
 - Analytics dashboard with total, positive, and negative case counts
 - Interactive charts: BMI distribution, Glucose distribution, Diabetes vs Non-diabetes
 - PDF report download with full patient details
@@ -27,7 +27,7 @@ A login-free web application that predicts whether a patient is diabetic using *
 ```
 Diabetes_Prediction_System/
 ├── app.py                 # Flask web application
-├── database.py            # SQLite prediction storage
+├── database.py            # SQL prediction storage
 ├── pdf_report.py          # PDF report generator
 ├── train_model.py         # Model training script
 ├── diabetes.csv           # Pima Indians Diabetes dataset
